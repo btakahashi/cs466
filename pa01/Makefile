@@ -1,17 +1,29 @@
-pa01.pdf: pa01.tex newton.c newton.out secant.c secant.out fpoint.c fpoint.out
+pa01.pdf: pa01.tex secantE.c secantE.out secantM.c secantM.out fpoint.c fpoint.out newtonE.c newtonE.out newtonM.c newtonM.out
 	xelatex pa01.tex
 
-newton: newton.c
-	gcc -o newton newton.c -Wall
+newtonE: newtonE.c
+	gcc -o newtonE newtonE.c -Wall
 
-newton.out: newton
-	./newton > newton.out
+newtonE.out: newtonE
+	./newtonE > newtonE.out
 
-secant: secant.c
-	gcc -o secant secant.c -Wall -lm
+newtonM: newtonM.c
+	gcc -o newtonM newtonM.c -Wall
 
-secant.out: secant
-	./secant > secant.out
+newtonM.out: newtonM
+	./newtonM > newtonM.out
+
+secantE: secantE.c
+	gcc -o secantE secantE.c -Wall -lm
+
+secantE.out: secantE
+	./secantE > secantE.out
+
+secantM: secantM.c
+	gcc -o secantM secantM.c -Wall -lm
+
+secantM.out: secantM
+	./secantM > secantM.out
 
 fpoint: fpoint.c
 	gcc -o fpoint fpoint.c -Wall

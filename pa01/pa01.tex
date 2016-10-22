@@ -9,26 +9,64 @@
 
 %"new line" seems to be ignored...can use \\ but it doesn't seem to appreciate it.
 %\vfill\eject forces page break
+\title{PA-01}
+\date{October 24, 2016}
+\author{Brandon Takahashi}
 \begin{document}
+\maketitle
 
-Newton's Method
-%\mylisting left justifies & includes line #'s
-\mylisting{newton.c}
+\section{Newton's Method}
+Solving $f(x)=0$ where $f(x)=x^2-2$ and $x_0=1$.
+\subsection*{i) Error Analysis ($e_n=x_n-\sqrt{2}$ for $n=0,..,8$)}
+\myoutput{newtonE.out}
+\subsection*{ii) Quadratic Convergence?}
+In this case quadratic convergence does not exist "perfectly". As seen between steps $n=1$ and $n=2$ the number of significant digits does not double.
+\subsection*{iii) Rounding Error and Numerical Convergence}
+The rounding error causes Newton's Method to become unstable for the given problem. While attempting to take a next step after the system shows the method has converged (via $error=0$) a rounding error occurs such that the solution moves away from the convergence point.
+\subsection*{iv) Solving for $M_n$ for $n=1,...,4$}
+The following list gives the values for $M_n$ solved by $M_n=\frac{|e_{n+1}|}{|e_n|^2}$.
+\myoutput{newtonM.out}
+\noindent
+All values of M for the given case are less than 1.
 
-Output
-%\myoutput indents slightly, no line #'s
-\myoutput{newton.out}
+\section{Secant Method}
+Solving $f(x)=0$ where $f(x)=x^2-2$ and $x_0=1$.
+\subsection*{i) Error Analysis ($e_n=x_n-\sqrt{2}$ for $n=0,..,8$)}
+\myoutput{secantE.out}
+\subsection*{ii) Quadratic Convergence?}
+Quadratic convergence does not occur using this method. As seen between steps $n=1$ and $n=2$ the number of significant digits does not increase and between very few steps does the number of significant digits double.
+\subsection*{iii) Solving for $M_n$ for $n=1,...,7$}
+The following list gives the values for $M_n$ solved by $M_n=\frac{|e_{n+1}|}{|e_n|^{1.618}}$.
+\myoutput{secantM.out}
+\noindent
+All values of M except for the first are less than 1.
 
-Secant Method
-\mylisting{secant.c}
-
-Output
-\myoutput{secant.out}
-
-Floating Point Method
-\mylisting{fpoint.c}
-
-Output
-\myoutput{fpoint.out}
+\section{Fixed Point Iteration}
+Solving $f(x)=0$ where $x_{n+1}=h(x_n)$ and $h(x)=x-\frac{f(x)f'(x)}{f'(x)^2-f(x)f''(x)}$.
+\subsection*{i) Show implications}
+$f(x)=0$ implies $h(x)=x$:
+\[h(x)=x-\frac{0*f'(x)}{f'(x)^2-0*f''(x)}\]
+\[h(x)=x-\frac{0}{f'(x)^2-0}\]
+\[h(x)=x\]
+$h(x)=x$ implies $f(x)=0$ or $f'(x)=0$:\\
+If $h(x)=x$ then $h(x)=x-0$ in some fassion. Therefor $\frac{f(x)f'(x)}{f'(x)^2-f(x)f''(x)}=0$ must be satisfied. To achieve this the numerator of the fraction must = 0 while the denominator $\neq{0}$. If $f(x)=0$ or $f'(x)=0$ this condition is satisfied. Further, if $f(x)=0$ AND $f'(x)=0$ there is an issue with division by 0:
+\[h(x)=x-\frac{0*0}{0^2-0*f''(x)}\]
+\[h(x)=x-\frac{0}{0-0}\]
+\[h(x)=x-\frac{0}{0}\]
+\[h(x)=undefined\]
+\subsection*{ii) $h'(x)$ and Stability of the Result}
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+f(x)f'(x)f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-f(x)f''(x))^2}\]
+Above equation taken from wolframAlpha...inserting links is harder than expected. Hopefully I remember to change this part.\\
+%https://www.wolframalpha.com/input/?i=d%2Fdx(f(x)f%27(x)%2F(f%27(x)%5E2-f(x)f%27%27(x))
+$h'(x)=0$ when $f(x)=0$ and $f'(x)\neq{0}$:
+\[h'(x)=-\frac{0*(-2*0*f''(x)^2+0*f'(x)*f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-0*f''(x))^2}\]
+\[h'(x)=-\frac{0*(0+0+f'(x)^2f''(x))}{(f'(x)^2-0)^2}\]
+\[h'(x)=-\frac{0}{(f'(x)^2)^2}\]
+\[h'(x)=0\]
+$h'(x)=2$ when $f(x)\neq{0}$, $f'(x)=0$ and $f''(x)\neq{0}$:
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+f(x)*0*f'''(x)+0^2*f''(x))}{(0^2-f(x)f''(x))^2}\]
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+0+0)}{(-f(x)f''(x))^2}\]
+\[h'(x)=-(-2)*\frac{f(x)(f(x)f''(x)^2)}{(f(x)f''(x))^2}\]
+\[h'(x)=2*\frac{f(x)^2f''(x)^2}{(f(x)f''(x))^2}\]
+\[h'(x)=2\]
 \end{document}
-
