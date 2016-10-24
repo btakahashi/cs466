@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2016.10.15)  21 OCT 2016 17:16
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/Debian) (preloaded format=xelatex 2016.10.21)  23 OCT 2016 20:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -99,14 +99,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 19.
  [1
 
-] [2] [3] [4] (./pa01.aux) ) 
+] [2] [3] [4] [5] [6] (./pa01.aux) ) 
 Here is how much of TeX's memory you used:
- 924 strings out of 495579
- 11891 string characters out of 6187321
+ 927 strings out of 495579
+ 11925 string characters out of 6187321
  61708 words of memory out of 5000000
  4227 multiletter control sequences out of 15000+600000
  8669 words of font info for 31 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,6n,19p,339b,292s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,6n,19p,454b,294s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on pa01.pdf (4 pages).
+Output written on pa01.pdf (6 pages).

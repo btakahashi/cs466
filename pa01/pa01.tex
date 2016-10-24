@@ -69,4 +69,23 @@ $h'(x)=2$ when $f(x)\neq{0}$, $f'(x)=0$ and $f''(x)\neq{0}$:
 \[h'(x)=-(-2)*\frac{f(x)(f(x)f''(x)^2)}{(f(x)f''(x))^2}\]
 \[h'(x)=2*\frac{f(x)^2f''(x)^2}{(f(x)f''(x))^2}\]
 \[h'(x)=2\]
+The above results show that fixed points of $h$ that result in $f(x)=0$ are stable because $h'(x)=0=f(x)$. Further, the fixed points of $h$ that result in $f'(x)=0$ are unstable because $h'(x)=2\neq{f'(x)}$.
+\subsection*{iii) Fixed Point Implementation and Comparison}
+\begin{center}
+{Error Analysis}
+\end{center}
+\myoutput{fpoint.out}
+\noindent
+On the given system the Fixed Point Iteration Method performs on-par with Netwon's Method. Both suffer from instability once the error reaches 0. While Newton's Method reaches an error of 0 one step before the Fixed Point Method, this may be due to rounding errors within the system.
+\subsection*{iv) Accelerated Rate of Convergence}
+
+\section{New Function Exploration}
+Function:
+\[f(x)=2cos(5x)+2cos(4x)+6cos(3x)+4cos(2x)+10cos(x)+3\]
+\subsection*{i) Newton's Method}
+\myoutput{newtOutVfPoint.out}
+\subsection*{ii) Fixed Point Method}
+\myoutput{newtVfpointOut.out}
+\subsection*{iii) Rate of Convergence and Rounding Error}
+The Fixed Point Method converges faster than Newton's Method. Even so, Newton's Method does not suffer from an error instability that the Fixed Point Method seems to. The Fixed Point Method error peaks out at a particular step for the given function and begins to lose significant digits after this step. This anamoly is most likely a result of rounding error within the system where the system performed multiple rounding errors back to back.
 \end{document}

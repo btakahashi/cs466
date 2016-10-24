@@ -33,7 +33,8 @@ int main()
 	int i;
 
 	err[0] = error(x);
-	printf("%d\tx = %10.20e\terror = %10.20e\n", 0, x, err[0]);
+	printf("n\t\t\t\tx\t\t\t\t\t\terror\n\n");
+	printf("%d\t%10.20e\t%10.20e\n", 0, x, err[0]);
 
 	for(i = 1; i < 9; i++)
 	{
@@ -41,7 +42,7 @@ int main()
 
 		err[i] = error(x);
 
-		printf("%d\tx = %10.20e\terror = %10.20e\n", i, x, err[i]);
+		printf("%d\t%10.20e\t%10.20e\n", i, x, err[i]);
 	}
 
 	return 0;
