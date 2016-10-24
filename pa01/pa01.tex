@@ -9,11 +9,15 @@
 
 %"new line" seems to be ignored...can use \\ but it doesn't seem to appreciate it.
 %\vfill\eject forces page break
-\title{PA-01}
-\date{October 24, 2016}
-\author{Brandon Takahashi}
+%\title{PA-01}
+%\date{October 24, 2016}
+%\author{Brandon Takahashi}
 \begin{document}
-\maketitle
+%\maketitle
+\noindent
+Brandon Takahashi\\
+October 24, 2016\\
+PA01
 
 \section{Newton's Method}
 Solving $f(x)=0$ where $f(x)=x^2-2$ and $x_0=1$.
@@ -56,8 +60,9 @@ If $h(x)=x$ then $h(x)=x-0$ in some fassion. Therefor $\frac{f(x)f'(x)}{f'(x)^2-
 \[h(x)=undefined\]
 \subsection*{ii) $h'(x)$ and Stability of the Result}
 \[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+f(x)f'(x)f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-f(x)f''(x))^2}\]
-Above equation taken from wolframAlpha...inserting links is harder than expected. Hopefully I remember to change this part.\\
-%https://www.wolframalpha.com/input/?i=d%2Fdx(f(x)f%27(x)%2F(f%27(x)%5E2-f(x)f%27%27(x))
+($h'(x)$ calculated via Wolfram Alpha)
+\newpage
+\noindent
 $h'(x)=0$ when $f(x)=0$ and $f'(x)\neq{0}$:
 \[h'(x)=-\frac{0*(-2*0*f''(x)^2+0*f'(x)*f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-0*f''(x))^2}\]
 \[h'(x)=-\frac{0*(0+0+f'(x)^2f''(x))}{(f'(x)^2-0)^2}\]
@@ -84,8 +89,37 @@ Function:
 \[f(x)=2cos(5x)+2cos(4x)+6cos(3x)+4cos(2x)+10cos(x)+3\]
 \subsection*{i) Newton's Method}
 \myoutput{newtOutVfPoint.out}
+\newpage
 \subsection*{ii) Fixed Point Method}
 \myoutput{newtVfpointOut.out}
 \subsection*{iii) Rate of Convergence and Rounding Error}
 The Fixed Point Method converges faster than Newton's Method. Even so, Newton's Method does not suffer from an error instability that the Fixed Point Method seems to. The Fixed Point Method error peaks out at a particular step for the given function and begins to lose significant digits after this step. This anamoly is most likely a result of rounding error within the system where the system performed multiple rounding errors back to back.
+\newpage
+\begin{center}
+{Code and closing remarks}
+\end{center}
+\noindent
+All code was worked on with Mat Boggs, Jason Rush, and myself. Some code has been modified from their original versions.\\
+\newline
+Newton's Method Error
+\mylisting{newtonE.c}
+\noindent
+Newton's Method Solving for M
+\mylisting{newtonM.c}
+\noindent
+Secant Method Error
+\mylisting{secantE.c}
+\noindent
+Secant Method Solving for M
+\mylisting{secantM.c}
+\noindent
+Fixed Point Error
+\mylisting{fpoint.c}
+\noindent
+Newton's Method for "New Function"
+\mylisting{newtOutVfPoint.c}
+\begin{itemize}
+	\item Some code has been modified to "look good" w/ LaTeX
+	\item Newton's and Fixed Point code for the "new function" are the same EXCEPT g should be replaced with h.
+\end{itemize}
 \end{document}

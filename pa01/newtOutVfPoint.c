@@ -3,17 +3,20 @@
 
 double f(double x)
 {
-	return 2 * cos(5 * x) + 2 * cos (4 * x) + 6 * cos(3 * x) + 4 * cos(2 * x) + 10 * cos(x) + 3;
+	return 2 * cos(5 * x) + 2 * cos (4 * x) + 6 * cos(3 * x) +
+			4 * cos(2 * x) + 10 * cos(x) + 3;
 }
 
 double df(double x)
 {
-	return -10 * sin(5 * x) - 8 * sin(4 * x) - 18 * sin(3 * x) - 8 * sin(2 * x) - 10 * sin(x);
+	return -10 * sin(5 * x) - 8 * sin(4 * x) - 18 * sin(3 * x) -
+			8 * sin(2 * x) - 10 * sin(x);
 }
 
 double d2f(double x)
 {
-	return -50 * cos(5 * x) - 32 * cos(4 * x) - 54 * cos(3 * x) - 16 * cos(2 * x) - 10 * cos(x);
+	return -50 * cos(5 * x) - 32 * cos(4 * x) - 54 * cos(3 * x) -
+			16 * cos(2 * x) - 10 * cos(x);
 }
 
 double g(double x)
@@ -51,7 +54,8 @@ int main()
 
 	for(i = 0; i < 9; i++)
 	{
-		printf("error%d: %10.20e\t error%d: %10.20e\n", i, err[i], i + 10, err[i + 10]);
+		printf("error%d: %10.20e\t error%d: %10.20e\n",
+			i, err[i], i + 10, err[i + 10]);
 	}
 		printf("error%d: %10.20e\n", 9, err[9]);
 
@@ -67,7 +71,8 @@ int main()
 
 	for(i = 0; i < 9; i++)
 	{
-		printf("error%d: %10.20e\t error%d: %10.20e\n", i, err[i], i + 10, err[i + 10]);
+		printf("error%d: %10.20e\t error%d: %10.20e\n",
+			i, err[i], i + 10, err[i + 10]);
 	}
 		printf("error%d: %10.20e\n", 9, err[9]);
 
