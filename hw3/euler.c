@@ -47,12 +47,12 @@ void euler()
 	}
 
 	for(int i = 0; i <= N; i++)
-		printf("t = %f \t w = %2.22e \t y = %2.22e \t err = %2.22e \n",
-			t[i], w[i], yVal[i], fabs(yVal[i] - w[i]));
+		printf("%d t = %.2f \t w = %.22e \t y = %.22e \t err = %.22e \n",
+			i, t[i], w[i], yVal[i], fabs(yVal[i] - w[i]));
 
 	// for part b of question 1
 	double test[3] = {1.04, 1.55, 1.97};
-	//double yActual[3] = {y(test[0]), y(test[1]), y(test[2])};
+	double yActual[3] = {y(test[0]), y(test[1]), y(test[2])};
 	double est[3];
 
 	est[0] = linInterp(w[0], w[1], t[0], t[1], test[0]);
@@ -60,7 +60,7 @@ void euler()
 	est[2] = linInterp(w[9], w[10], t[9], t[10], test[2]);
 
 	for(int i = 0; i < 3; i++)
-		printf("@t = %f estimate = %2.22e\n", test[i], est[i]);
+		printf("@t = %.2f \t estimate = %.22e \t actual = %.22e\n", test[i], est[i], yActual[i]);
 }
 
 int main()
