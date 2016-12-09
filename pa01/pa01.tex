@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+
+\usepackage{moreverb,plain,graphicx}
+\def\verbatimtabsize{4\relax}
+\def\listingoffset{1em}
+\def\listinglabel#1{\llap{\tiny\it\the#1}\hskip\listingoffset\relax}
+\def\mylisting#1{{\fontsize{10}{11}\selectfont\listinginput[1]{1}{#1}}}
+\def\myoutput#1{{\fontsize{10}{11}\selectfont\verbatimtabinput{#1}}}
+
+%"new line" seems to be ignored...can use \\ but it doesn't seem to appreciate it.
+%\vfill\eject forces page break
+%\title{PA-01}
+%\date{October 24, 2016}
+%\author{Brandon Takahashi}
+\begin{document}
+%\maketitle
+\noindent
+Brandon Takahashi\\
+October 24, 2016\\
+PA01
+
+\section{Newton's Method}
+Solving $f(x)=0$ where $f(x)=x^2-2$ and $x_0=1$.
+\subsection*{i) Error Analysis ($e_n=x_n-\sqrt{2}$ for $n=0,..,8$)}
+\myoutput{newtonE.out}
+\subsection*{ii) Quadratic Convergence?}
+In this case quadratic convergence does not exist "perfectly". As seen between steps $n=1$ and $n=2$ the number of significant digits does not double.
+\subsection*{iii) Rounding Error and Numerical Convergence}
+The rounding error causes Newton's Method to become unstable for the given problem. While attempting to take a next step after the system shows the method has converged (via $error=0$) a rounding error occurs such that the solution moves away from the convergence point.
+\subsection*{iv) Solving for $M_n$ for $n=1,...,4$}
+The following list gives the values for $M_n$ solved by $M_n=\frac{|e_{n+1}|}{|e_n|^2}$.
+\myoutput{newtonM.out}
+\noindent
+All values of M for the given case are less than 1.
+
+\section{Secant Method}
+Solving $f(x)=0$ where $f(x)=x^2-2$ and $x_0=1$.
+\subsection*{i) Error Analysis ($e_n=x_n-\sqrt{2}$ for $n=0,..,8$)}
+\myoutput{secantE.out}
+\subsection*{ii) Quadratic Convergence?}
+Quadratic convergence does not occur using this method. As seen between steps $n=1$ and $n=2$ the number of significant digits does not increase and between very few steps does the number of significant digits double.
+\subsection*{iii) Solving for $M_n$ for $n=1,...,7$}
+The following list gives the values for $M_n$ solved by $M_n=\frac{|e_{n+1}|}{|e_n|^{1.618}}$.
+\myoutput{secantM.out}
+\noindent
+All values of M except for the first are less than 1.
+
+\section{Fixed Point Iteration}
+Solving $f(x)=0$ where $x_{n+1}=h(x_n)$ and $h(x)=x-\frac{f(x)f'(x)}{f'(x)^2-f(x)f''(x)}$.
+\subsection*{i) Show implications}
+$f(x)=0$ implies $h(x)=x$:
+\[h(x)=x-\frac{0*f'(x)}{f'(x)^2-0*f''(x)}\]
+\[h(x)=x-\frac{0}{f'(x)^2-0}\]
+\[h(x)=x\]
+$h(x)=x$ implies $f(x)=0$ or $f'(x)=0$:\\
+If $h(x)=x$ then $h(x)=x-0$ in some fassion. Therefor $\frac{f(x)f'(x)}{f'(x)^2-f(x)f''(x)}=0$ must be satisfied. To achieve this the numerator of the fraction must = 0 while the denominator $\neq{0}$. If $f(x)=0$ or $f'(x)=0$ this condition is satisfied. Further, if $f(x)=0$ AND $f'(x)=0$ there is an issue with division by 0:
+\[h(x)=x-\frac{0*0}{0^2-0*f''(x)}\]
+\[h(x)=x-\frac{0}{0-0}\]
+\[h(x)=x-\frac{0}{0}\]
+\[h(x)=undefined\]
+\subsection*{ii) $h'(x)$ and Stability of the Result}
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+f(x)f'(x)f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-f(x)f''(x))^2}\]
+($h'(x)$ calculated via Wolfram Alpha)
+\newpage
+\noindent
+$h'(x)=0$ when $f(x)=0$ and $f'(x)\neq{0}$:
+\[h'(x)=-\frac{0*(-2*0*f''(x)^2+0*f'(x)*f'''(x)+f'(x)^2f''(x))}{(f'(x)^2-0*f''(x))^2}\]
+\[h'(x)=-\frac{0*(0+0+f'(x)^2f''(x))}{(f'(x)^2-0)^2}\]
+\[h'(x)=-\frac{0}{(f'(x)^2)^2}\]
+\[h'(x)=0\]
+$h'(x)=2$ when $f(x)\neq{0}$, $f'(x)=0$ and $f''(x)\neq{0}$:
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+f(x)*0*f'''(x)+0^2*f''(x))}{(0^2-f(x)f''(x))^2}\]
+\[h'(x)=-\frac{f(x)(-2f(x)f''(x)^2+0+0)}{(-f(x)f''(x))^2}\]
+\[h'(x)=-(-2)*\frac{f(x)(f(x)f''(x)^2)}{(f(x)f''(x))^2}\]
+\[h'(x)=2*\frac{f(x)^2f''(x)^2}{(f(x)f''(x))^2}\]
+\[h'(x)=2\]
+The above results show that fixed points of $h$ that result in $f(x)=0$ are stable because $h'(x)=0=f(x)$. Further, the fixed points of $h$ that result in $f'(x)=0$ are unstable because $h'(x)=2\neq{f'(x)}$.
+\subsection*{iii) Fixed Point Implementation and Comparison}
+\begin{center}
+{Error Analysis}
+\end{center}
+\myoutput{fpoint.out}
+\noindent
+On the given system the Fixed Point Iteration Method performs on-par with Netwon's Method. Both suffer from instability once the error reaches 0. While Newton's Method reaches an error of 0 one step before the Fixed Point Method, this may be due to rounding errors within the system.
+\subsection*{iv) Accelerated Rate of Convergence}
+
+\section{New Function Exploration}
+Function:
+\[f(x)=2cos(5x)+2cos(4x)+6cos(3x)+4cos(2x)+10cos(x)+3\]
+\subsection*{i) Newton's Method}
+\myoutput{newtOutVfPoint.out}
+\newpage
+\subsection*{ii) Fixed Point Method}
+\myoutput{newtVfpointOut.out}
+\subsection*{iii) Rate of Convergence and Rounding Error}
+The Fixed Point Method converges faster than Newton's Method. Even so, Newton's Method does not suffer from an error instability that the Fixed Point Method seems to. The Fixed Point Method error peaks out at a particular step for the given function and begins to lose significant digits after this step. This anamoly is most likely a result of rounding error within the system where the system performed multiple rounding errors back to back.
+\newpage
+\begin{center}
+{Code and closing remarks}
+\end{center}
+\noindent
+All code was worked on with Mat Boggs, Jason Rush, and myself. Some code has been modified from their original versions.\\
+\newline
+Newton's Method Error
+\mylisting{newtonE.c}
+\noindent
+Newton's Method Solving for M
+\mylisting{newtonM.c}
+\noindent
+Secant Method Error
+\mylisting{secantE.c}
+\noindent
+Secant Method Solving for M
+\mylisting{secantM.c}
+\noindent
+Fixed Point Error
+\mylisting{fpoint.c}
+\noindent
+Newton's Method for "New Function"
+\mylisting{newtOutVfPoint.c}
+\begin{itemize}
+	\item Some code has been modified to "look good" w/ LaTeX
+	\item Newton's and Fixed Point code for the "new function" are the same EXCEPT g should be replaced with h.
+\end{itemize}
+\end{document}
